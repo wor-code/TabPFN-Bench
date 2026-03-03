@@ -50,6 +50,7 @@ TabPFN-Bench/
 ├── constant.py # Dataset lists and metric labels
 ├── dataset.py # Dataset wrappers
 ├── featurizer.py # Molecular featurization utilities
+├── plot_tukey_cld.py  # RM-ANOVA + Tukey HSD + CLD plotting
 │
 ├── data/
 │ ├── clf/ # Classification datasets (CSV)
@@ -72,7 +73,6 @@ Regression: data/reg/{dataset_name}.csv
 Physicochemical / QM: data/physical/{dataset_name}.csv
 
 ## Environment & Dependencies
-
 Core dependencies include:
 numpy, pandas, scipy, scikit-learn
 rdkit, descriptastorus
@@ -87,4 +87,19 @@ python feature.py
 Generated features are saved to:
 data/{model_type}_features/{dataset_name}_{mol_rep}_fp.csv
 
+## Statistical Analysis
+Aggregated model comparisons across datasets are performed using:
+- Repeated-measures ANOVA (RM-ANOVA)
+- Tukey’s Honest Significant Difference (HSD) post-hoc test
+- Compact Letter Display (CLD) construction for pairwise grouping
+
+Color encoding in Figures 1 is determined based on CLD:
+- **Blue**: best-performing model
+- **Red**: significantly worse than the best model (Tukey HSD, α = 0.05)
+- **Gray**: not significantly different from the best model
+The implementation can be found in: plot_tukey_cld.py
+
+
+## License
+This project is licensed under the MIT License.
 
